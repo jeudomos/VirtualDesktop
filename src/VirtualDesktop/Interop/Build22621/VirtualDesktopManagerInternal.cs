@@ -34,25 +34,7 @@ internal class VirtualDesktopManagerInternal : ComWrapperBase<IVirtualDesktopMan
         => this.InvokeMethodAndWrap();
 
     public IVirtualDesktop GetAdjacentDesktop(IVirtualDesktop pDesktopReference, AdjacentDesktop uDirection)
-    {
-        // => this.InvokeMethodAndWrap(Args(((VirtualDesktop)pDesktopReference).ComObject, uDirection));
-        var desktops = GetDesktops().ToArray();
-        var current = GetCurrentDesktop();
-        var currentId = current.GetID();
-        var i = 0;
-        while (i < desktops.Length && !currentId.Equals(desktops[i].GetID())) { i++; }
-        if (i < desktops.Length)
-        {
-            if (uDirection == AdjacentDesktop.LeftDirection)
-            {
-                if (i == 0) return desktops[desktops.Length - 1];
-                return desktops[i - 1];
-            }
-            else if (i == desktops.Length - 1) return desktops[0];
-            return desktops[i + 1];
-        }
-        return current;
-    }
+        => this.InvokeMethodAndWrap(Args(((VirtualDesktop)pDesktopReference).ComObject, uDirection));
 
     public IVirtualDesktop FindDesktop(Guid desktopId)
         => this.InvokeMethodAndWrap(Args(desktopId));

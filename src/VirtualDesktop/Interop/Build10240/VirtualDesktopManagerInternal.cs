@@ -1,7 +1,6 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using System.Windows.Media.Animation;
 using WindowsDesktop.Interop.Proxy;
 
 namespace WindowsDesktop.Interop.Build10240;
@@ -35,19 +34,7 @@ internal class VirtualDesktopManagerInternal : ComWrapperBase<IVirtualDesktopMan
         => this.InvokeMethodAndWrap();
 
     public IVirtualDesktop GetAdjacentDesktop(IVirtualDesktop pDesktopReference, AdjacentDesktop uDirection)
-    {
-        // => this.InvokeMethodAndWrap(Args(((VirtualDesktop)pDesktopReference).ComObject, uDirection));
-        var desktops=GetDesktops().ToArray();
-        var current = GetCurrentDesktop();
-        var currentId = current.GetID();
-        var i = 0;
-        while(i < desktops.Length && currentId != desktops[i].GetID()) { i++; }
-        if (i < desktops.Length) { 
-            if (i == 0) return desktops[desktops.Length - 1];
-            return desktops[i - 1];
-        }
-        return current;
-    }
+        => this.InvokeMethodAndWrap(Args(((VirtualDesktop)pDesktopReference).ComObject, uDirection));
 
     public IVirtualDesktop FindDesktop(Guid desktopId)
         => this.InvokeMethodAndWrap(Args(desktopId));
