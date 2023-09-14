@@ -51,6 +51,10 @@
     <EmbeddedResource Include="Interop\Build10240\.interfaces\IVirtualDesktopNotification.cs" />
     <EmbeddedResource Include="Interop\Build10240\.interfaces\IVirtualDesktopNotificationService.cs" />
     <EmbeddedResource Include="Interop\Build10240\.interfaces\IVirtualDesktopPinnedApps.cs" />
+    <EmbeddedResource Include="Interop\Build22621\.interfaces\IVirtualDesktop.cs" />
+    <EmbeddedResource Include="Interop\Build22621\.interfaces\IVirtualDesktopManagerInternal.cs" />
+    <EmbeddedResource Include="Interop\Build22621\.interfaces\IVirtualDesktopNotification.cs" />
+    <EmbeddedResource Include="Interop\Build22621\.interfaces\IVirtualDesktopNotificationService.cs" />
     <EmbeddedResource Include="Interop\Build22000\.interfaces\IVirtualDesktop.cs" />
     <EmbeddedResource Include="Interop\Build22000\.interfaces\IVirtualDesktopManagerInternal.cs" />
     <EmbeddedResource Include="Interop\Build22000\.interfaces\IVirtualDesktopNotification.cs" />

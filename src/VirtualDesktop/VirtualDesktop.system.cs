@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using WindowsDesktop.Interop;
 using WindowsDesktop.Interop.Build10240;
 using WindowsDesktop.Interop.Build22000;
+using WindowsDesktop.Interop.Build22621;
 using WindowsDesktop.Interop.Proxy;
 using WindowsDesktop.Properties;
 using WindowsDesktop.Utils;
@@ -35,13 +36,13 @@ partial class VirtualDesktop
     {
         _provider = Environment.OSVersion.Version.Build switch
         {
+            >= 22621 => new VirtualDesktopProvider22621(),
             >= 22000 => new VirtualDesktopProvider22000(),
             >= 10240 => new VirtualDesktopProvider10240(),
             _ => new VirtualDesktopProvider.NotSupported()
         };
 
-        Debug.WriteLine($"*** {AssemblyInfo.Title} Library ***");
-        Debug.WriteLine($"Version:  {AssemblyInfo.VersionString}");
+        Debug.WriteLine("*** VirtualDesktop Library ***");
         Debug.WriteLine($"OS Build: {Environment.OSVersion.Version.Build}");
         Debug.WriteLine($"Provider: {_provider.GetType().Name}");
     }
@@ -49,6 +50,7 @@ partial class VirtualDesktop
     private VirtualDesktop(IVirtualDesktop source)
     {
         this._source = source;
+        
         this._name = source.GetName();
         this._wallpaperPath = source.GetWallpaperPath();
         this.Id = source.GetID();

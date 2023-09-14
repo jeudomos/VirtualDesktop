@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -100,6 +100,7 @@ internal class ComInterfaceAssemblyBuilder
         //   IVirtualDesktop
         //           ├── 10240, VirtualDesktop.Interop.Build10240..interfaces.IVirtualDesktop.cs
         //           └── 22000, VirtualDesktop.Interop.Build22000..interfaces.IVirtualDesktop.cs
+        //           └── 22621, VirtualDesktop.Interop.Build22621..interfaces.IVirtualDesktop.cs
         //   IVirtualDesktopPinnedApps
         //           └── 10240, VirtualDesktop.Interop.Build10240..interfaces.IVirtualDesktopPinnedApps.cs
         var interfaceSourceFiles = new Dictionary<string, SortedList<int, string>>();

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using WindowsDesktop.Interop.Proxy;
 
 namespace WindowsDesktop;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -31,7 +31,7 @@ partial class MainWindow
 
     private void InitializeComObjects()
     {
-        VirtualDesktop.Configure();
+        VirtualDesktop.Configure(new VirtualDesktopConfiguration { SaveCompiledAssembly=false});
 
         VirtualDesktop.Created += (_, desktop) =>
         {

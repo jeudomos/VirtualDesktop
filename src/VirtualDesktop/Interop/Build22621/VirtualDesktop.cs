@@ -1,9 +1,9 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using WindowsDesktop.Interop.Proxy;
 
-namespace WindowsDesktop.Interop.Build10240;
+namespace WindowsDesktop.Interop.Build22621;
 
 internal class VirtualDesktop : ComWrapperBase<IVirtualDesktop>, IVirtualDesktop
 {
@@ -21,8 +21,8 @@ internal class VirtualDesktop : ComWrapperBase<IVirtualDesktop>, IVirtualDesktop
         => this._id ?? (Guid)(this._id = this.InvokeMethod<Guid>());
 
     public string GetName()
-        => "";
+        => this.InvokeMethod<HString>();
 
     public string GetWallpaperPath()
-        => "";
+        => this.InvokeMethod<HString>();
 }

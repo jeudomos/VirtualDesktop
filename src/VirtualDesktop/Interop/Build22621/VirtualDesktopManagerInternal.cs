@@ -1,10 +1,9 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using System.Windows.Media.Animation;
 using WindowsDesktop.Interop.Proxy;
 
-namespace WindowsDesktop.Interop.Build10240;
+namespace WindowsDesktop.Interop.Build22621;
 
 internal class VirtualDesktopManagerInternal : ComWrapperBase<IVirtualDesktopManagerInternal>, IVirtualDesktopManagerInternal
 {
@@ -37,14 +36,20 @@ internal class VirtualDesktopManagerInternal : ComWrapperBase<IVirtualDesktopMan
     public IVirtualDesktop GetAdjacentDesktop(IVirtualDesktop pDesktopReference, AdjacentDesktop uDirection)
     {
         // => this.InvokeMethodAndWrap(Args(((VirtualDesktop)pDesktopReference).ComObject, uDirection));
-        var desktops=GetDesktops().ToArray();
+        var desktops = GetDesktops().ToArray();
         var current = GetCurrentDesktop();
         var currentId = current.GetID();
         var i = 0;
-        while(i < desktops.Length && currentId != desktops[i].GetID()) { i++; }
-        if (i < desktops.Length) { 
-            if (i == 0) return desktops[desktops.Length - 1];
-            return desktops[i - 1];
+        while (i < desktops.Length && !currentId.Equals(desktops[i].GetID())) { i++; }
+        if (i < desktops.Length)
+        {
+            if (uDirection == AdjacentDesktop.LeftDirection)
+            {
+                if (i == 0) return desktops[desktops.Length - 1];
+                return desktops[i - 1];
+            }
+            else if (i == desktops.Length - 1) return desktops[0];
+            return desktops[i + 1];
         }
         return current;
     }
@@ -65,13 +70,13 @@ internal class VirtualDesktopManagerInternal : ComWrapperBase<IVirtualDesktopMan
         => this.InvokeMethod(Args(this._factory.ApplicationViewFromHwnd(hWnd).ComObject, ((VirtualDesktop)desktop).ComObject));
 
     public void SetDesktopName(IVirtualDesktop desktop, string name)
-        => throw new NotSupportedException();
+        => this.InvokeMethod(Args(((VirtualDesktop)desktop).ComObject, new HString(name)));
 
     public void SetDesktopWallpaper(IVirtualDesktop desktop, string path)
-        => throw new NotSupportedException();
+        => this.InvokeMethod(Args(((VirtualDesktop)desktop).ComObject, new HString(path)));
 
     public void UpdateWallpaperPathForAllDesktops(string path)
-        => throw new NotSupportedException();
+        => this.InvokeMethod(Args(new HString(path)));
 
     private VirtualDesktop InvokeMethodAndWrap(object?[]? parameters = null, [CallerMemberName] string methodName = "")
         => new(this.ComInterfaceAssembly, this.InvokeMethod<object>(parameters, methodName) ?? throw new Exception("Failed to get IVirtualDesktop instance."));

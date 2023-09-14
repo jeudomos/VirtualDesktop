@@ -1,12 +1,13 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WindowsDesktop.Interop.Build10240;
 using WindowsDesktop.Interop.Proxy;
 using WindowsDesktop.Properties;
 
-namespace WindowsDesktop.Interop.Build10240;
+namespace WindowsDesktop.Interop.Build22621;
 
-internal class VirtualDesktopProvider10240 : VirtualDesktopProvider
+internal class VirtualDesktopProvider22621 : VirtualDesktopProvider
 {
     private IVirtualDesktopManager? _virtualDesktopManager;
     private ApplicationViewCollection? _applicationViewCollection;
@@ -46,4 +47,5 @@ internal class VirtualDesktopProvider10240 : VirtualDesktopProvider
         this._virtualDesktopPinnedApps = new VirtualDesktopPinnedApps(assembly, factory);
         this._virtualDesktopNotificationService = new VirtualDesktopNotificationService(assembly, factory);
     }
+
 }

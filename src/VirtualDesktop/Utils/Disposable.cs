@@ -1,4 +1,4 @@
-﻿namespace WindowsDesktop.Utils
+namespace WindowsDesktop.Utils
 {
 	internal class Disposable
 	{

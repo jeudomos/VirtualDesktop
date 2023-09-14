@@ -1,29 +1,29 @@
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
 using WindowsDesktop.Interop.Build10240;
 
-namespace WindowsDesktop.Interop.Build22000
+namespace WindowsDesktop.Interop.Build22621
 {
     [ComImport]
     [Guid("00000000-0000-0000-0000-000000000000") /* replace at runtime */]
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
     public interface IVirtualDesktopManagerInternal
     {
-        int GetCount(IntPtr hWndOrMon);
+        int GetCount();
 
         void MoveViewToDesktop(IApplicationView pView, IVirtualDesktop desktop);
 
         bool CanViewMoveDesktops(IApplicationView pView);
 
-        IVirtualDesktop GetCurrentDesktop(IntPtr hWndOrMon);
+        IVirtualDesktop GetCurrentDesktop();
 
-        IObjectArray GetDesktops(IntPtr hWndOrMon);
+        IObjectArray GetDesktops();
 
         IVirtualDesktop GetAdjacentDesktop(IVirtualDesktop pDesktopReference, int uDirection);
 
-        void SwitchDesktop(IntPtr hWndOrMon, IVirtualDesktop desktop);
+        void SwitchDesktop(IVirtualDesktop desktop);
 
-        IVirtualDesktop CreateDesktop(IntPtr hWndOrMon);
+        IVirtualDesktop CreateDesktop();
 
         void MoveDesktop(IVirtualDesktop desktop, IntPtr hWndOrMon, int nIndex);
 
